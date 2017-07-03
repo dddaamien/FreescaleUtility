@@ -51,7 +51,7 @@ public class UseTutoClientGUI
 		try
 			{
 			//Creation d'un objet VoitureGUI. L'objet voiture GUI lit les annotations des trames passé en paramètres et affiches les fenêtres demmandées.
-			//L'URL de connection est enregisté dans le fichier "Settings/SettingsConnection.txt"
+			//L'URL de connection est enregisté qqdans le fichier "Settings/SettingsConnection.txt"
 			VoitureGUI voitureGUI = new VoitureGUI(APP_ID, new TrameReceivedTuto(), new TrameSendTuto());
 
 			//Il est possible de récuppérer l'objet voiture afin d'ajouter ses propres listeners
@@ -79,5 +79,5 @@ public class UseTutoClientGUI
 	|*			  Static			*|
 	\*------------------------------*/
 
-	private static final int APP_ID = 333;
+	private static final int APP_ID = 343;
 	}

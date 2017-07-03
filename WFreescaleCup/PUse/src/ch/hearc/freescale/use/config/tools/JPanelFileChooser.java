@@ -11,6 +11,7 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import ch.hearc.freescale.use.Client;
@@ -62,6 +63,7 @@ public class JPanelFileChooser extends JPanel
 			}
 
 		// JComponent : add
+		add(new JLabel("Log: "));
 		add(eblLog);
 		add(btnSearch);
 		}

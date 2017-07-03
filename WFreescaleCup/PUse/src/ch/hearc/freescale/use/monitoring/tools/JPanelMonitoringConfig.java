@@ -29,6 +29,10 @@ public class JPanelMonitoringConfig extends JPanel
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
+	public static void getInstance()
+		{
+
+		}
 
 	/*------------------------------*\
 	|*				Set				*|
@@ -61,7 +65,8 @@ public class JPanelMonitoringConfig extends JPanel
 			}
 
 		// JComponent : add
-		add(sliderSamplesDisplayed);
+//		add(sliderSamplesDisplayed);
+		add(new JLabel("Undersampling: "));
 		add(sliderSamplingTime);
 		}
 
@@ -119,6 +124,7 @@ public class JPanelMonitoringConfig extends JPanel
 	// Tools
 	private JSlider sliderSamplingTime;
 	private JSlider sliderSamplesDisplayed;
+//	private JPanelMonitoringConfig instance;
 
 	private int samplingTime;
 	}

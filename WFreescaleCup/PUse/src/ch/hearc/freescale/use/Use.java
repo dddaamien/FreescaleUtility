@@ -56,23 +56,6 @@ public class Use
 	|*							Methodes Private						*|
 	\*------------------------------------------------------------------*/
 
-//	private static void monitoringGUI() throws VoitureException
-//		{
-//		//Creation d'un objet VoitureGUI. L'objet voiture GUI lit les annotations des trames passé en paramètres et affiches les fenêtres demmandées.
-//		//L'URL de connection est enregisté dans le fichier "Settings/SettingsConnection.txt"
-//		VoitureGUI voitureGUI = new VoitureGUI(AppID, new TrameReceived(), new TrameSend());
-//
-//		//Il est possible de récuppérer l'objet voiture afin d'ajouter ses propres listeners
-//		voitureGUI.getVoiture().addTrameListener(new TrameListener()
-//			{
-//
-//			@Override
-//			public void tramePerformed(TrameEvent event)
-//				{
-//				System.out.println("Trame received : " + event.getTrame().toString());
-//				}
-//			});
-//		}
 
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|

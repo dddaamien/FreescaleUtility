@@ -74,6 +74,7 @@ public class Client
 						register();
 						connection();
 						addListener();
+						sendTrame();
 						if (workbookName != null)
 							{
 							initalizeExcelLogger();
@@ -91,7 +92,6 @@ public class Client
 					catch (VoitureException e)
 						{
 						// TODO Auto-generated catch block
-						stop();
 						e.printStackTrace();
 						}
 					}
@@ -203,7 +203,37 @@ public class Client
 
 	private void sendTrame() throws VoitureException
 		{
-		voiture.sendTrame(new TrameSend(vitesseGauche, vitesseDroite, posServo, expoCam, led));
+		Thread t1 = new Thread(new Runnable()
+			{
+
+			@Override
+			public void run()
+				{
+				while(isActive.get())
+					{
+					System.out.println("passe ici");
+					// TODO Auto-generated method stub
+					try
+						{
+						voiture.sendTrame(new TrameSend(vitesseGauche, vitesseDroite, posServo, expoCam, led));
+						Thread.sleep(1000);
+						}
+					catch (VoitureException e)
+						{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						}
+					catch (InterruptedException e)
+						{
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+						}
+					}
+
+				}
+			});
+		t1.start();
+
 		}
 
 	private void saveWorkbook() throws VoitureException

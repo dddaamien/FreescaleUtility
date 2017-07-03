@@ -5,13 +5,13 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.util.prefs.Preferences;
 import java.util.regex.Pattern;
 
 import javax.swing.InputVerifier;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -49,15 +49,7 @@ public class JPanelConfig extends JPanel
 		btnConnect = new JButton();
 		port = new JSpinner();
 		panelFileChoser = new JPanelFileChooser(client);
-		try
-			{
-			ipAddress = new JTextField(InetAddress.getLocalHost().getHostAddress());
-			}
-		catch (UnknownHostException e)
-			{
-			ipAddress = new JTextField("XXX.XXX.XXX.XXX");
-			//e.printStackTrace();
-			}
+		ipAddress = new JTextField();
 		switchConnectState();
 		// Layout : Specification
 			{
@@ -70,9 +62,12 @@ public class JPanelConfig extends JPanel
 
 		// JComponent : add
 		add(panelFileChoser);
+		add(new JLabel("Ip: "));
 		add(ipAddress);
+		add(new JLabel("Port: "));
 		add(port);
 		add(btnConnect);
+		loadPreferences();
 		}
 
 	private void control()
@@ -144,6 +139,7 @@ public class JPanelConfig extends JPanel
 			client.setServerName(ipAddress.getText());
 			client.setServerPort((Integer)port.getValue());
 			System.out.println("Connexion à: " + client.getServerName() + " port: " + client.getServerPort());
+			savePreferences();
 			client.start();
 			}
 		else
@@ -188,6 +184,18 @@ public class JPanelConfig extends JPanel
 			}
 		}
 
+	private void loadPreferences()
+	{
+	this.ipAddress.setText(PREFERENCES.get(IP, "127.0.0.1"));
+	this.port.setValue(PREFERENCES.getInt(PORT, 5001));
+	}
+
+	private void savePreferences()
+	{
+	PREFERENCES.put(IP, ipAddress.getText());
+	PREFERENCES.putInt(PORT, (Integer)this.port.getValue());
+	}
+
 	/*------------------------------------------------------------------*\
 	|*							Attributs Private						*|
 	\*------------------------------------------------------------------*/
@@ -198,8 +206,12 @@ public class JPanelConfig extends JPanel
 	private JPanelFileChooser panelFileChoser;
 	private JTextField ipAddress;
 	private JSpinner port;
+
 	//static
 	private static final Pattern IP_PATTERN = Pattern.compile("^(([01]?\\d\\d?|2[0-4]\\d|25[0-5])\\.){3}([01]?\\d\\d?|2[0-4]\\d|25[0-5])$");
 	private static final String CONNECT_TEXT = "Connect";
 	private static final String DISCONNECT_TEXT = "Disconnect";
+	private static final Preferences PREFERENCES = Preferences.userNodeForPackage(JPanelConfig.class);
+	private static final String IP = "IP";
+	private static final String PORT = "Port";
 	}

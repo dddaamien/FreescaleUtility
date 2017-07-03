@@ -1,20 +1,27 @@
 
 package ch.hearc.freescale.use.control;
 
-import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JCheckBox;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import ch.hearc.freescale.use.Client;
 
-public class JPanelControl extends JPanel
+public class JPanelOptions extends JPanel
 	{
 
 	/*------------------------------------------------------------------*\
 	|*							Constructeurs							*|
 	\*------------------------------------------------------------------*/
 
-	public JPanelControl(Client client)
+	public JPanelOptions(Client client)
 		{
 		this.client = client;
 		geometry();
@@ -41,41 +48,52 @@ public class JPanelControl extends JPanel
 	private void geometry()
 		{
 		// JComponent : Instanciation
-		panelCroixDirectionnelle = new JPanelCroixDirectionnelle(client);
-		panelProfilsVitesse = new JPanelProfilsVitesse();
-		panelOptions = new JPanelOptions(client);
+		cbLed = new JCheckBox("led");
+
+		tempsExpo = new JSlider();
+		labelTempsExpo = new JLabel("Temps d’exposition de la caméra [ms]");
 
 		// Layout : Specification
 			{
 			//			FlowLayout flowlayout = new FlowLayout(FlowLayout.CENTER);
 			//			setLayout(flowlayout);
 
-			//			layout = new GridLayout(3, 1); //2 colonnes, nb de lignes calculés automatiquement, ici 3
-			//			setLayout(layout);
-
-			BorderLayout borderLayout = new BorderLayout();
-			setLayout(borderLayout);
-
-			//borderLayout.setHgap(20);
-			//borderLayout.setVgap(20);
+			layout = new GridLayout(2, 2); //2 colonnes, nb de lignes calculés automatiquement, ici 3
+			setLayout(layout);
 
 			// flowlayout.setHgap(20);
 			// flowlayout.setVgap(20);
 			}
 
 		// JComponent : add
-		//		add(panelCroixDirectionnelle);
-		//		add(panelProfilsVitesse);
-		//		add(panelOptions);
-
-		add(panelCroixDirectionnelle, BorderLayout.NORTH);
-		add(panelProfilsVitesse, BorderLayout.CENTER);
-		add(panelOptions, BorderLayout.SOUTH);
+		add(new JPanel());
+		add(labelTempsExpo);
+		add(cbLed);
+		add(tempsExpo);
 		}
 
 	private void control()
 		{
-		//rien
+		cbLed.addActionListener(new ActionListener()
+			{
+
+			@Override
+			public void actionPerformed(ActionEvent arg0)
+				{
+				client.setLed(cbLed.isSelected());
+				}
+			});
+
+		tempsExpo.addChangeListener(new ChangeListener()
+			{
+
+			@Override
+			public void stateChanged(ChangeEvent e)
+				{
+				client.setExpoCam(tempsExpo.getValue());
+				System.out.println(tempsExpo.getValue());
+				}
+			});
 		}
 
 	private void appearance()
@@ -83,10 +101,11 @@ public class JPanelControl extends JPanel
 		//		layout.setHgap(50);
 		//		layout.setVgap(20);
 
-		//debug
-		//panelCroixDirectionnelle.setBackground(Color.CYAN);
-		//panelProfilsVitesse.setBackground(Color.RED);
-		//panelOptions.setBackground(Color.GREEN);
+		//slider temps d'exposition
+		tempsExpo.setMajorTickSpacing(50);
+		tempsExpo.setMinorTickSpacing(10);
+		tempsExpo.setPaintTicks(true);
+		tempsExpo.setPaintLabels(true);
 		}
 
 	/*------------------------------------------------------------------*\
@@ -96,9 +115,10 @@ public class JPanelControl extends JPanel
 	// Tools
 	private Client client;
 
-	private JPanelCroixDirectionnelle panelCroixDirectionnelle;
-	private JPanelProfilsVitesse panelProfilsVitesse;
-	private JPanelOptions panelOptions;
+	private JCheckBox cbLed;
 
-	//private GridLayout layout;
+	private JLabel labelTempsExpo;
+	private JSlider tempsExpo;
+
+	private GridLayout layout;
 	}

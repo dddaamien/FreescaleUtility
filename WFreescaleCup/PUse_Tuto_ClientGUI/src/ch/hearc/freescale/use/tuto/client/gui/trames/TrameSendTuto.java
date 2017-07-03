@@ -48,15 +48,25 @@ public class TrameSendTuto implements Trame_I
 	 */
 	public TrameSendTuto()
 		{
-		this.parametre=55; //example of default value
+		//example of default value
+		this.vitesseGauche=(float)0;
+		this.vitesseDroite=(float)0;
+		this.expoTime=(float)0;
+		this.led=0;
+		this.posServo=(float)0;
 		}
 
 	/**
 	 * Constructeur "plein" obligatoire
 	 */
-	public TrameSendTuto(Integer parametre)
+	public TrameSendTuto(Float vitesseGauche, Float vitesseDroite, Float posServo, Float expoTime, Short led)
 		{
-		this.parametre = parametre;
+		super();
+		this.vitesseGauche = vitesseGauche;
+		this.vitesseDroite = vitesseDroite;
+		this.posServo = posServo;
+		this.expoTime = expoTime;
+		this.led = led;
 		}
 
 	/*------------------------------------------------------------------*\
@@ -89,5 +99,9 @@ public class TrameSendTuto implements Trame_I
 	\*------------------------------------------------------------------*/
 
 	// Input
-	private Integer parametre;
+	private Float vitesseGauche;
+	private Float vitesseDroite;
+	private Float posServo;
+	private Float expoTime;
+	private Short led;
 	}

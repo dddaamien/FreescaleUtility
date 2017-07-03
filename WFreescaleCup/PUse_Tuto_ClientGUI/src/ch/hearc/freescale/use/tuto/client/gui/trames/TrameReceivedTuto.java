@@ -1,11 +1,9 @@
 package ch.hearc.freescale.use.tuto.client.gui.trames;
 
 import ch.hearc.freescale.api.gui.presenter.annotation.container.DisplayDeskop;
-import ch.hearc.freescale.api.gui.presenter.annotation.jcomponent.DisplayCurveAbsolute;
 import ch.hearc.freescale.api.gui.presenter.annotation.jcomponent.DisplayCurveRelatif;
 import ch.hearc.freescale.api.gui.presenter.annotation.jcomponent.DisplayDigit;
 import ch.hearc.freescale.api.gui.presenter.annotation.jcomponent.DisplayGauge;
-import ch.hearc.freescale.api.gui.presenter.annotation.jcomponent.DisplayImageCurve;
 import ch.hearc.freescale.api.gui.presenter.annotation.jcomponent.DisplayImageRoll;
 import ch.hearc.freescale.api.gui.presenter.annotation.jcomponent.DisplayLevel;
 import ch.hearc.freescale.api.image.Image;
@@ -78,37 +76,54 @@ public class TrameReceivedTuto implements Trame_I
 	/**
 	 * Constructeur "plein" obligatoire
 	 */
-	public TrameReceivedTuto(Float floatField, Integer integerField, Short shortField, Byte byteField, Image imageField)
+	public TrameReceivedTuto(Float vitesseGauche, Float vitesseDroite, Float accX, Float accY, Float accZ, Float magX, Float magY, Float magZ, Float yaw, Float roll, Float pitch, Image camera)
 		{
-		this.floatField = floatField;
-		this.integerField = integerField;
-		this.shortField = shortField;
-		this.byteField = byteField;
-		this.imageField = imageField;
+		super();
+		this.vitesseGauche = vitesseGauche;
+		this.vitesseDroite = vitesseDroite;
+		this.accX = accX;
+		this.accY = accY;
+		this.accZ = accZ;
+		this.magX = magX;
+		this.magY = magY;
+		this.magZ = magZ;
+		this.yaw = yaw;
+		this.roll = roll;
+		this.pitch = pitch;
+		this.camera = camera;
 		}
-
 	/*------------------------------------------------------------------*\
 	|*							Methodes Public							*|
 	\*------------------------------------------------------------------*/
-
 	@Override
 	public String toString()
 		{
 		StringBuilder builder = new StringBuilder();
-		builder.append("DemoTrame [floatField=");
-		builder.append(this.floatField);
-		builder.append(", integerField=");
-		builder.append(this.integerField);
-		builder.append(", shortField=");
-		builder.append(this.shortField);
-		builder.append(", byteField=");
-		builder.append(this.byteField);
-		builder.append(", imageField=");
-		builder.append(this.imageField);
+		builder.append("TrameReceivedTuto [vitesseGauche=");
+		builder.append(this.vitesseGauche);
+		builder.append(", vitesseDroite=");
+		builder.append(this.vitesseDroite);
+		builder.append(", accX=");
+		builder.append(this.accX);
+		builder.append(", accY=");
+		builder.append(this.accY);
+		builder.append(", accZ=");
+		builder.append(this.accZ);
+		builder.append(", magX=");
+		builder.append(this.magX);
+		builder.append(", magY=");
+		builder.append(this.magY);
+		builder.append(", magZ=");
+		builder.append(this.magZ);
+		builder.append(", yaw=");
+		builder.append(this.yaw);
+		builder.append(", roll=");
+		builder.append(this.roll);
+		builder.append(", pitch=");
+		builder.append(this.pitch);
 		builder.append("]");
 		return builder.toString();
 		}
-
 
 	/*------------------------------*\
 	|*				Get				*|
@@ -164,26 +179,55 @@ public class TrameReceivedTuto implements Trame_I
 	 * 		-@DisplayDigit
 	 * 		-@DisplayGauge
 	 * 		-@DisplayLevel
-	 * 		-@DisplayImageRoll
+	 * 		-@DisplayImageR
 	 * 		-@DisplayImageCurve
 	 */
 
-	@DisplayCurveAbsolute(pointsToDisplay= 100, min=-1000, max= 1000)
-	private Float floatField;
+//	@DisplayCurveAbsolute(pointsToDisplay= 100, min=-1000, max= 1000)
+//	private Float floatField;
+//
+//	@DisplayCurveRelatif(pointsToDisplay= 150)
+//	private Integer integerField;
+//
+//	@DisplayDigit(title="Short Field",decimalCount=0)
+//	private Short shortField;
+//
+//	//les a annotion sont cumulable. Il est donc possible d'afficher les même valeures dans plusieures view
+//	@DisplayGauge(min=-100, max = 100)
+//	@DisplayLevel(min=-100, max = 100)
+//	private Byte byteField;
+//
+//	@DisplayImageRoll
+//	@DisplayImageCurve
+//	private Image imageField;
 
-	@DisplayCurveRelatif(pointsToDisplay= 150)
-	private Integer integerField;
+	@DisplayGauge(min = -300, max = 300)
+	private Float vitesseGauche;
+	@DisplayGauge(min = -300, max = 300)
+	private Float vitesseDroite;
 
-	@DisplayDigit(title="Short Field",decimalCount=0)
-	private Short shortField;
+	@DisplayLevel(min = -100, max = 100)
+	private Float accX;
+	@DisplayLevel(min = -100, max = 100)
+	private Float accY;
+	@DisplayLevel(min = -100, max = 100)
+	private Float accZ;
 
-	//les a annotion sont cumulable. Il est donc possible d'afficher les même valeures dans plusieures view
-	@DisplayGauge(min=-100, max = 100)
-	@DisplayLevel(min=-100, max = 100)
-	private Byte byteField;
+	@DisplayCurveRelatif
+	private Float magX;
+	@DisplayCurveRelatif
+	private Float magY;
+	@DisplayCurveRelatif
+	private Float magZ;
+
+	@DisplayDigit
+	private Float yaw;
+	@DisplayDigit
+	private Float roll;
+	@DisplayDigit
+	private Float pitch;
 
 	@DisplayImageRoll
-	@DisplayImageCurve
-	private Image imageField;
+	private Image camera;
 	}
 

@@ -1,6 +1,6 @@
 @echo off
 
-set PATH_7Z=C:\Soft\sevenZip
+set PATH_7Z=C:\Soft\sevenZip\7-Zip
 set PATH=%PATH%;%PATH_7z%
 
 7z a -tzip Deploy/tuto/PUse_Tuto_ClientConsole.jar ../PUse_Tuto_ClientConsole/bin/ch

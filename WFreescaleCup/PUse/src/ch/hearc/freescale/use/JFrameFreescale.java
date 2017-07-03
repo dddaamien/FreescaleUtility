@@ -3,7 +3,6 @@ package ch.hearc.freescale.use;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import ch.hearc.freescale.use.config.JPanelConfig;
@@ -56,7 +55,7 @@ public class JFrameFreescale extends JFrame
 		// JComponent : add
 		add(panelConfig, BorderLayout.NORTH);
 		add(panelMonitoring, BorderLayout.CENTER);
-		add(new JButton("Control"), BorderLayout.WEST);
+		add(panelControl, BorderLayout.WEST);
 		}
 
 	private void control()
@@ -66,7 +65,7 @@ public class JFrameFreescale extends JFrame
 
 	private void appearance()
 		{
-		setSize(600, 400);
+		setSize(1280, 720);
 		setLocationRelativeTo(null); // frame centrer
 		setVisible(true); // last!
 		}
